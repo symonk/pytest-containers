@@ -1,0 +1,61 @@
+files: '^(src|scripts|tests)'
+repos:
+  - repo: meta
+    hooks:
+      - id: identity
+        types: [python]
+  - repo: https://github.com/ambv/black
+    rev: a552f7096a9f6e016c9bb1df1e0a77a17caeec1c
+    hooks:
+      - id: black
+        args: [--safe, --quiet, --line-length=120]
+        language_version: python3.9
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: b0f11fe246ae49c7a3791009753d2148b97cb677
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: debug-statements
+      - id: detect-private-key
+      - id: requirements-txt-fixer
+      - id: check-builtin-literals
+      - id: check-json
+      - id: check-merge-conflict
+      - id: forbid-submodules
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: 32119baf69e913a72f2e1b1fbe0d56921b670ebb
+    hooks:
+      - id: isort
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.1.1
+    hooks:
+      - id: mypy
+        args: [--non-interactive, --install-types]
+  - repo: https://github.com/PyCQA/flake8
+    rev: 29e9e5df65ce5352edca393a0ce6c67bbed5329a
+    hooks:
+      - id: flake8
+        args: [--max-line-length=120]
+  - repo: https://github.com/symonk/pre-commit-pdb-vars
+    rev: ae4a3643086810d62c6815527547c9dbd1f9b584
+    hooks:
+      - id: pdb-vars
+        args: [--ignore, commands]
+  - repo: https://github.com/hadialqattan/pycln
+    rev: 2b2ee5d94542913e26c9e3bb38ee4d05a9e01066
+    hooks:
+      - id: pycln
+        args: [--config=pyproject.toml, --all]
+  - repo: https://github.com/PyCQA/docformatter
+    rev: v1.6.0
+    hooks:
+      - id: docformatter
+        args: [-i, --wrap-summaries, "120", --wrap-descriptions, "120"]
+  - repo: https://github.com/asottile/add-trailing-comma
+    rev: 62ceed238b1709bcb8b3199eb09a16350229de4b
+    hooks:
+      - id: add-trailing-comma
+        args: [--py36-plus]
