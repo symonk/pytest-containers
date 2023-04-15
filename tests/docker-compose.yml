@@ -4,3 +4,8 @@ services:
       image: 'kennethreitz/httpbin'
       ports:
         - '80:80'
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:80/anything"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
