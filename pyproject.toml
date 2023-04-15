@@ -15,6 +15,7 @@ docker = "^6.0.1"
 
 [tool.poetry.group.dev.dependencies]
 towncrier = "^22.12.0"
+httpx = "^0.23.3"
 
 [build-system]
 requires = ["poetry-core"]
