@@ -1,6 +1,6 @@
 version: '2'
 services:
     httpbin:
-      build: '.'
+      image: 'kennethreitz/httpbin'
       ports:
         - '80:80'
