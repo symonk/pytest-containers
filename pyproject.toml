@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "pytest-containers"
-version = "0.1.0"
+version = "0.2.0"
 description = "A pytest plugin for starting docker compose services around tests"
 authors = ["symonk <jackofspaces@gmail.com>"]
 license = "Apache License 2.0"
 readme = "README.md"
-packages = [{include = "src/pytest_containers"}]
+packages = [{include = "pytest_containers"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -16,13 +16,14 @@ docker = "^6.0.1"
 [tool.poetry.group.dev.dependencies]
 towncrier = "^22.12.0"
 httpx = "^0.23.3"
+coverage = "^7.2.7"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.plugins.pytest11]
-pytest_containers = "src/pytest_containers/plugin.py"
+pytest_containers = "pytest_containers.plugin"
 
 [tool.isort]
 multi_line_output = 3
@@ -32,7 +33,7 @@ use_parentheses = true
 ensure_newline_before_comments = true
 line_length = 120
 force_single_line = true
-known_first_party = "src/pytest_containers/"
+known_first_party = "pytest_containers/"
 default_section = 'THIRDPARTY'
 forced_separate = 'tests'
 
@@ -63,5 +64,5 @@ blank = true
 [tool.towncrier]
 directory = "changelog/"
 filename = "changelog/changelog.rst"
-package = "src/pytest_containers"
+package = "pytest_containers"
 title_format = "{name} {version} ({project_date})"

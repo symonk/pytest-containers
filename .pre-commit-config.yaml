@@ -1,4 +1,4 @@
-files: '^(src|scripts|tests)'
+files: '^script|tests|pytest_containers'
 repos:
   - repo: meta
     hooks:
