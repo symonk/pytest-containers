@@ -5,7 +5,7 @@ repos:
       - id: identity
         types: [python]
   - repo: https://github.com/ambv/black
-    rev: 898915d5569f503c278ef53cb6f10e003034943c
+    rev: 35722dff623f3cdf5018e3f1183cd4e02e91caa8
     hooks:
       - id: black
         args: [--safe, --quiet, --line-length=120]
@@ -35,7 +35,7 @@ repos:
       - id: mypy
         args: [--non-interactive, --install-types]
   - repo: https://github.com/PyCQA/flake8
-    rev: c8d75d9966c074770695cd44e2c2e9d8488761e7
+    rev: 1f8437433e68c7fd6901faf413c3fb253dd838e7
     hooks:
       - id: flake8
         args: [--max-line-length=120]
