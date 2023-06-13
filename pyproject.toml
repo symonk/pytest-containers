@@ -17,6 +17,9 @@ docker = "^6.0.1"
 towncrier = "^22.12.0"
 httpx = "^0.23.3"
 coverage = "^7.2.7"
+mkdocs = "^1.4.3"
+mkdocs-material = "^9.1.15"
+mkdocstrings = "^0.22.0"
 
 [build-system]
 requires = ["poetry-core"]
