@@ -1,6 +1,6 @@
 import os
 import pathlib
-
+import typing
 import pytest
 
 
@@ -19,7 +19,7 @@ def pytest_addoption(parser: pytest.Parser):
 
 
 @pytest.fixture(scope="session")
-def docker_compose_file(pytestconfig: pytest.Config) -> str:
+def docker_compose_files(pytestconfig: pytest.Config) -> typing.Sequence[str]:
     """Returns the full path to the compose file used for service startup.
 
     # Todo: We should probably allow multiple compose files.
