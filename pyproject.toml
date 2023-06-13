@@ -20,6 +20,7 @@ coverage = "^7.2.7"
 mkdocs = "^1.4.3"
 mkdocs-material = "^9.1.15"
 mkdocstrings = "^0.22.0"
+poetry-plugin-up = "^0.3.0"
 
 [build-system]
 requires = ["poetry-core"]
