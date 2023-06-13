@@ -9,6 +9,7 @@ def main() -> int:
     return_code += remove_lock_if_exists()
     return_code += poetry_update()
     return_code += pre_commit_update()
+    return_code += poetry_upgrade()
     if not return_code:
         print("Updating dependencies on the remote now.")
         commit_and_push()
@@ -19,6 +20,9 @@ def main() -> int:
 
 def remove_lock_if_exists():
     return _run_command(("rm", "-f", "poetry.lock"))
+
+def poetry_upgrade():
+    return _run_command(("poetry", "up", "--latest"))
 
 
 def poetry_update():
