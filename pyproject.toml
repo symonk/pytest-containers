@@ -15,7 +15,7 @@ docker = "^6.0.1"
 
 [tool.poetry.group.dev.dependencies]
 towncrier = "^22.12.0"
-httpx = "^0.23.3"
+httpx = "^0.24.1"
 coverage = "^7.2.7"
 mkdocs = "^1.4.3"
 mkdocs-material = "^9.1.15"
