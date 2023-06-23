@@ -9,7 +9,7 @@ packages = [{include = "pytest_containers"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pytest = "^7.3.2"
+pytest = "^7.4.0"
 docker = "^6.1.3"
 
 
