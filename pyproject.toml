@@ -18,7 +18,7 @@ towncrier = "^23.6.0"
 httpx = "^0.24.1"
 coverage = "^7.2.7"
 mkdocs = "^1.4.3"
-mkdocs-material = "^9.1.17"
+mkdocs-material = "^9.1.20"
 mkdocstrings = "^0.22.0"
 poetry-plugin-up = "^0.3.0"
 
