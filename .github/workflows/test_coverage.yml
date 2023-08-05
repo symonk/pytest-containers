@@ -60,7 +60,7 @@ jobs:
             tox_env: "py310"
             do_cov: false
           - name: "windows-py311"
-            python: "py311-dev"
+            python: "py311"
             os: windows-latest
             tox_env: "py311"
             do_cov: false
