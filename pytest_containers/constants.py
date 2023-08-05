@@ -6,6 +6,7 @@ class Constants(str, Enum):
 
     MASTER = "master"
     LIBRARY_NAME = "pytest-containers"
+    COMPOSE_YML = "docker-compose.yml"
 
 
 class EnvironmentVars(str, Enum):
