@@ -4,7 +4,9 @@ import typing
 
 import pytest
 
+from .constants import Constants
 from .constants import EnvironmentVars
+from .invoker import SubProcessInvoker
 
 
 @pytest.hookimpl
@@ -34,7 +36,10 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 def pytest_configure(config: pytest.Config) -> None:
     """Conditionally register the plugin."""
     if not config.option.disable_docker:
-        config.pluginmanager.register(PytestContainersPlugin, "pytest-docker")
+        config.pluginmanager.register(
+            PytestContainersPlugin(config=config, invoker=SubProcessInvoker()),
+            Constants.LIBRARY_NAME,
+        )
 
 
 @pytest.fixture(scope="session")
