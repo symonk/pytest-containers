@@ -5,12 +5,25 @@ import pytest
 
 
 @pytest.fixture(scope="session")
-def docker_compose_files(pytestconfig: pytest.Config) -> typing.Union[pathlib.Path, typing.Sequence[pathlib.Path]]:
-    """Returns the full path to the compose file used for service startup.
+def docker_command() -> str:
+    """Returns the prefix compose command that is used when executing subprocesses.
 
-    :param pytestconfig: The pytest config object.
+    Override this fixture to use something custom, or to use the older style `docker-compose` command.
     """
-    return pathlib.Path(pytestconfig.rootdir) / "docker-compose.yml"
+    return "docker compose"
+
+
+@pytest.fixture(scope="session")
+def docker_compose_files(pytestconfig: pytest.Config) -> typing.Union[pathlib.Path, typing.Sequence[pathlib.Path]]:
+    """Returns by default a `docker-compose.yml` that exists in the root directory of the project.  In order to
+    customise the docker compose yaml file paths override this fixture and provide a sequence of Paths, all of which
+    will be passed to docker compose -f.
+
+    :param pytestconfig: The `pytest.Config` object.
+    """
+    return tuple(
+        pathlib.Path(pytestconfig.rootdir) / "docker-compose.yml",
+    )
 
 
 @pytest.fixture(scope="session")

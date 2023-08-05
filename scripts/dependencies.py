@@ -21,6 +21,7 @@ def main() -> int:
 def remove_lock_if_exists():
     return _run_command(("rm", "-f", "poetry.lock"))
 
+
 def poetry_upgrade():
     return _run_command(("poetry", "up", "--latest"))
 
