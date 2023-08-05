@@ -43,7 +43,7 @@ jobs:
             python: "py311-dev"
             os: "ubuntu-20.04"
             tox_env: "py311"
-            do_cov: "true"
+            do_cov: false
           - name: "windows-py38"
             python: "3.8"
             os: windows-latest
