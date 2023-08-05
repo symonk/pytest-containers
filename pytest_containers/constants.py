@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Constants:
     """String constants."""
@@ -7,6 +8,7 @@ class Constants:
     MASTER = "master"
     LIBRARY_NAME = "pytest-containers"
     COMPOSE_YML = "docker-compose.yml"
+
 
 @dataclass
 class EnvironmentVars:

@@ -1,21 +1,32 @@
 import pytest
 
 
-def test_docker_compose_command_is_correct(pytester: pytest.Pytester) -> None:
+def test_default_compose_command(pytester: pytest.Pytester) -> None:
+    pytester.makepyfile(
+        """
+        def test_override_docker_command(docker_command) -> None:
+            assert docker_command == "docker compose"
+        """,
+    )
+    result = pytester.runpytest()
+    result.assert_outcomes(passed=1)
+
+
+def test_overriding_docker_compose_command_works(pytester: pytest.Pytester) -> None:
     pytester.makeconftest(
-    """
+        """
     import pytest
 
     @pytest.fixture(scope='session')
     def docker_command() -> str:
         return "dockercompose"
-    """
+    """,
     )
     pytester.makepyfile(
-        """ 
+        """
         def test_override_docker_command(docker_command) -> None:
             assert docker_command == "dockercompose"
-        """
+        """,
     )
     result = pytester.runpytest()
     result.assert_outcomes(passed=1)

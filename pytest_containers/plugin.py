@@ -37,8 +37,8 @@ def pytest_configure(config: pytest.Config) -> None:
     """Conditionally register the plugin."""
     if not config.option.disable_docker:
         config.pluginmanager.register(
-            PytestContainersPlugin(config=config, invoker=SubProcessInvoker()),
-            Constants.LIBRARY_NAME,
+            plugin=PytestContainersPlugin(config=config, invoker=SubProcessInvoker()),
+            name=Constants.LIBRARY_NAME,
         )
 
 
@@ -58,6 +58,10 @@ class PytestContainersPlugin:
     def pytest_sessionstart(self) -> None:
         """Register the plugins."""
 
+
+# ----- Fixtures -----
+
+
 @pytest.fixture(scope="session")
 def docker_command() -> str:
     """Returns the prefix compose command that is used when executing subprocesses.
@@ -65,6 +69,7 @@ def docker_command() -> str:
     Override this fixture to use something custom, or to use the older style `docker-compose` command.
     """
     return "docker compose"
+
 
 @pytest.fixture(scope="session")
 def docker_compose_files(
@@ -78,10 +83,11 @@ def docker_compose_files(
     """
     return (pathlib.Path(pytestconfig.rootdir) / Constants.COMPOSE_YML,)
 
+
 @pytest.fixture(scope="session")
 def docker_services():
-    """Wraps a docker compose up and down invocation as a context, yielding the running service objects into the
-    tests that need them, guaranteeing to teardown the services cluster after the test session has finished.
+    """Wraps a docker compose up and down invocation as a context, yielding the running service objects into the tests
+    that need them, guaranteeing to teardown the services cluster after the test session has finished.
 
     # Todo: This is not `xdist` aware and probably should be; each worker can return the running services rather
     than attempt to compose up in a subprocess.
