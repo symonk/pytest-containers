@@ -25,8 +25,8 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     )
     group.addoption(
         "--disable-docker",
-        action="store_false",
-        default=True,
+        action="store_true",
+        default=False,
         dest="disable_docker",
         help="Do not register the plugin, no services will be started.",
     )
