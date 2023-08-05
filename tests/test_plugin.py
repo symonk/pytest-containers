@@ -1,7 +1,7 @@
 import pytest
 
 
-@pytest.skip(reason="not registering properly")
+@pytest.mark.skip(reason="not registering properly")
 def test_class_plugin_is_loaded_by_default(pytester: pytest.Pytester):
     pytester.makepyfile(
         """
@@ -13,7 +13,7 @@ def test_class_plugin_is_loaded_by_default(pytester: pytest.Pytester):
     result.assert_outcomes(passed=1)
 
 
-@pytest.skip(reason="not registering properly")
+@pytest.mark.skip(reason="not registering properly")
 def test_disable_docker_does_not_register_plugin(pytester: pytest.Pytester):
     pytester.makepyfile(
         """
