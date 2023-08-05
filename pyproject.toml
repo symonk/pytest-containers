@@ -4,7 +4,7 @@ version = "0.3.0"
 description = "A pytest plugin for starting docker compose services around tests"
 authors = ["symonk <jackofspaces@gmail.com>"]
 license = "Apache License 2.0"
-readme = "README.md"
+readme = "README.rst"
 packages = [{include = "pytest_containers"}]
 
 [tool.poetry.dependencies]
