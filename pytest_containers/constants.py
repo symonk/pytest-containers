@@ -1,15 +1,15 @@
-from enum import Enum
+from dataclasses import dataclass
 
-
-class Constants(str, Enum):
+@dataclass
+class Constants:
     """String constants."""
 
     MASTER = "master"
     LIBRARY_NAME = "pytest-containers"
     COMPOSE_YML = "docker-compose.yml"
 
-
-class EnvironmentVars(str, Enum):
+@dataclass
+class EnvironmentVars:
     """Environment Variable Lookups."""
 
     PYTEST_XDIST_WORKER = "PYTEST_XDIST_WORKER"

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-containers"
-version = "0.2.0"
+version = "0.3.0"
 description = "A pytest plugin for starting docker compose services around tests"
 authors = ["symonk <jackofspaces@gmail.com>"]
 license = "Apache License 2.0"
