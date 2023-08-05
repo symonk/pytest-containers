@@ -1,7 +1,10 @@
+import os
 import pathlib
 import typing
 
 import pytest
+
+from .constants import EnvironmentVars
 
 
 @pytest.hookimpl
@@ -18,11 +21,20 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         dest="keep_alive",
         help="Keep the compose services running after pytest has exited.",
     )
+    group.addoption(
+        "--disable-docker",
+        action="store_false",
+        default=True,
+        dest="disable_docker",
+        help="Do not register the plugin, no services will be started.",
+    )
 
 
 @pytest.hookimpl
 def pytest_configure(config: pytest.Config) -> None:
     """Conditionally register the plugin."""
+    if not config.option.disable_docker:
+        config.pluginmanager.register(PytestContainersPlugin, "pytest-docker")
 
 
 @pytest.fixture(scope="session")
@@ -55,5 +67,18 @@ def docker_services():
     """
 
 
-class ContainerPlugin:
+class PytestContainersPlugin:
     """The core pytest-container plugin."""
+
+    def __init__(self, config: pytest.Config, invoker) -> None:
+        self.pytestconfig = config
+        self.process_invoker = invoker
+
+    def is_xdist_worker(self) -> bool:
+        """Decipher if the executable pytest process is one of an xdist execnet gateway/worker."""
+        master = "master"
+        return os.environ.get(EnvironmentVars.PYTEST_XDIST_WORKER, master) == master
+
+    @pytest.hookimpl
+    def pytest_sessionstart(self) -> None:
+        """Register the plugins."""
