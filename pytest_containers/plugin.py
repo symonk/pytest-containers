@@ -4,8 +4,8 @@ import typing
 
 import pytest
 
-from .constants import Constants
-from .constants import EnvironmentVars
+from ._constants import Constants
+from ._constants import EnvironmentVars
 from .invoker import SubProcessInvoker
 
 

@@ -21,7 +21,7 @@ jobs:
           "windows-py38",
           "windows-py39",
           "windows-py310",
-          "windows-py311",
+          "windows-py311-dev",
         ]
         include:
           - name: "ubuntu-py38"
@@ -40,7 +40,7 @@ jobs:
             tox_env: "py310"
             do_cov: true
           - name: "ubuntu-py311"
-            python: "py311"
+            python: "py311-dev"
             os: "ubuntu-20.04"
             tox_env: "py311"
             do_cov: "true"
@@ -60,7 +60,7 @@ jobs:
             tox_env: "py310"
             do_cov: false
           - name: "windows-py311"
-            python: "3.11"
+            python: "py311-dev"
             os: windows-latest
             tox_env: "py311"
             do_cov: false
