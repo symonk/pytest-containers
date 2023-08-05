@@ -4,6 +4,27 @@ import typing
 import pytest
 
 
+@pytest.hookimpl
+def pytest_addoption(parser: pytest.Parser) -> None:
+    """Register the plugins command line arguments.
+
+    :params parser: The pytest custom argparser.
+    """
+    group = parser.getgroup("pytest-containers")
+    group.addoption(
+        "--keep-alive",
+        action="store_true",
+        default=False,
+        dest="keep_alive",
+        help="Keep the compose services running after pytest has exited.",
+    )
+
+
+@pytest.hookimpl
+def pytest_configure(config: pytest.Config) -> None:
+    """Conditionally register the plugin."""
+
+
 @pytest.fixture(scope="session")
 def docker_command() -> str:
     """Returns the prefix compose command that is used when executing subprocesses.
@@ -21,9 +42,7 @@ def docker_compose_files(pytestconfig: pytest.Config) -> typing.Union[pathlib.Pa
 
     :param pytestconfig: The `pytest.Config` object.
     """
-    return tuple(
-        pathlib.Path(pytestconfig.rootdir) / "docker-compose.yml",
-    )
+    return (pathlib.Path(pytestconfig.rootdir) / "docker-compose.yml",)
 
 
 @pytest.fixture(scope="session")
@@ -34,3 +53,7 @@ def docker_services():
     # Todo: This is not `xdist` aware and probably should be; each worker can return the running services rather than
     attempt to compose up in a subprocess.
     """
+
+
+class ContainerPlugin:
+    """The core pytest-container plugin."""
