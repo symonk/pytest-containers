@@ -40,7 +40,7 @@ jobs:
             tox_env: "py310"
             do_cov: true
           - name: "ubuntu-py311"
-            python: "py311-dev"
+            python: "3.11"
             os: "ubuntu-20.04"
             tox_env: "py311"
             do_cov: false
@@ -60,7 +60,7 @@ jobs:
             tox_env: "py310"
             do_cov: false
           - name: "windows-py311"
-            python: "py311"
+            python: "3.11"
             os: windows-latest
             tox_env: "py311"
             do_cov: false
