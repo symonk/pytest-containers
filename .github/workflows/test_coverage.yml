@@ -17,9 +17,11 @@ jobs:
           "ubuntu-py38",
           "ubuntu-py39",
           "ubuntu-py310",
+          "ubuntu-py311",
           "windows-py38",
           "windows-py39",
           "windows-py310",
+          "windows-py311",
         ]
         include:
           - name: "ubuntu-py38"
@@ -37,6 +39,11 @@ jobs:
             os: ubuntu-20.04
             tox_env: "py310"
             do_cov: true
+          - name: "ubuntu-py311"
+            python: "py311"
+            os: "ubuntu-20.04"
+            tox_env: "py311"
+            do_cov: "true"
           - name: "windows-py38"
             python: "3.8"
             os: windows-latest
@@ -51,6 +58,11 @@ jobs:
             python: "3.10"
             os: windows-latest
             tox_env: "py310"
+            do_cov: false
+          - name: "windows-py311"
+            python: "3.11"
+            os: windows-latest
+            tox_env: "py311"
             do_cov: false
     steps:
       - uses: actions/checkout@v3
