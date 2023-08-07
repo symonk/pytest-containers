@@ -96,3 +96,13 @@ def docker_services(docker_compose_files) -> typing.Generator[DockerComposeServi
     with DockerComposeServices(invoker=SubProcessInvoker(compose_files=docker_compose_files)) as services:
         # automatically compose `down` the services after the pytest session has finished.
         yield services
+
+
+@pytest.fixture(scope="session")
+def docker_project_name() -> str:
+    """The project name passed to `-p` for docker compose when starting the project.
+
+    By default the name utilises the pid of the pytest process.
+    """
+    # Todo: Implement.
+    return "pytest_1"

@@ -16,4 +16,5 @@ class SubProcessInvoker:
 
         This utilises `docker compose config` and relies on the exit code of that for each file.
         """
-        return True
+        command = ""
+        return not command
