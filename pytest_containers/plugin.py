@@ -38,7 +38,7 @@ def pytest_configure(config: pytest.Config) -> None:
     """Conditionally register the plugin."""
     if not config.option.disable_docker:
         config.pluginmanager.register(
-            plugin=PytestContainersPlugin(config=config, invoker=SubProcessInvoker()),
+            plugin=PytestContainersPlugin(config=config, invoker=SubProcessInvoker([])),
             name=Constants.LIBRARY_NAME,
         )
 
@@ -93,6 +93,6 @@ def docker_services(docker_compose_files) -> typing.Generator[DockerComposeServi
     # Todo: This is not `xdist` aware and probably should be; each worker can return the running services rather
     than attempt to compose up in a subprocess.
     """
-    with DockerComposeServices(invoker=SubProcessInvoker(), compose_files=docker_compose_files) as services:
+    with DockerComposeServices(invoker=SubProcessInvoker(compose_files=docker_compose_files)) as services:
         # automatically compose `down` the services after the pytest session has finished.
         yield services
