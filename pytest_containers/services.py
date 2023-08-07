@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import pathlib
 import types
 import typing
 from dataclasses import dataclass
@@ -11,8 +12,10 @@ from .protocols import Runnable
 class DockerComposeServices:
     """Access to the underlying docker services."""
 
-    def __init__(self, process_invoker: Runnable) -> None:
-        self.process_invoker = process_invoker
+    def __init__(self, compose_files: typing.Sequence[pathlib.Path], invoker: Runnable) -> None:
+        self.files = compose_files
+        self.service: typing.Dict[typing.Any, typing.Any] = {}
+        self.invoker = invoker
 
     def start(self) -> None:
         ...

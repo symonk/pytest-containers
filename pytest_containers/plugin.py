@@ -86,17 +86,13 @@ def docker_compose_files(
 
 
 @pytest.fixture(scope="session")
-def _subprocess_invoker() -> SubProcessInvoker:
-    return SubProcessInvoker()
-
-
-@pytest.fixture(scope="session")
-def docker_services(_subprocess_invoker) -> typing.Generator[DockerComposeServices, None, None]:
+def docker_services(docker_compose_files) -> typing.Generator[DockerComposeServices, None, None]:
     """Wraps a docker compose up and down invocation as a context, yielding the running service objects into the tests
     that need them, guaranteeing to teardown the services cluster after the test session has finished.
 
     # Todo: This is not `xdist` aware and probably should be; each worker can return the running services rather
     than attempt to compose up in a subprocess.
     """
-    with DockerComposeServices(process_invoker=_subprocess_invoker) as services:
+    with DockerComposeServices(invoker=SubProcessInvoker(), compose_files=docker_compose_files) as services:
+        # automatically compose `down` the services after the pytest session has finished.
         yield services
