@@ -11,7 +11,7 @@ repos:
         args: [--safe, --quiet, --line-length=120]
         language_version: python3.9
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 1790c6b40aa27ce48236525540a5150493cf8fef
+    rev: 61b5f7e6f73c8308fc77c9fcfd10005ab7d14b80
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -45,7 +45,7 @@ repos:
       - id: pdb-vars
         args: [--ignore, commands]
   - repo: https://github.com/hadialqattan/pycln
-    rev: v2.2.1
+    rev: a965b2d45e2007bfa2484ebb015eaa2ee0c1a75e
     hooks:
       - id: pycln
         args: [--config=pyproject.toml, --all]
