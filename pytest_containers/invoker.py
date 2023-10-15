@@ -10,12 +10,3 @@ class SubProcessInvoker:
 
     def run(self):
         """Run a subprocess."""
-
-    def are_valid_compose_files(self) -> bool:
-        """Checks that each of the paths provided are considered correct docker-compose files.
-
-        This utilises `docker compose config` and relies on the exit code of that for each file.
-
-        """
-        command = ""
-        return not command

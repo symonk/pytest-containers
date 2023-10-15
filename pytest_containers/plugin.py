@@ -51,7 +51,7 @@ class PytestContainersPlugin:
 
     @pytest.hookimpl
     def pytest_sessionstart(self) -> None:
-        """Register the plugins."""
+        """Handle compose specifics."""
 
 
 # ----- Fixtures -----
