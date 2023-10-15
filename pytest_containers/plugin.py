@@ -1,11 +1,9 @@
-import os
 import pathlib
 import typing
 
 import pytest
 
 from .constants import Constants
-from .constants import EnvironmentVars
 from .invoker import SubProcessInvoker
 from .services import DockerComposeServices
 
@@ -32,10 +30,6 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         dest="no_docker",
         help="Do not register the plugin, no services will be started.",
     )
-    group.addoption(
-        "--compose-path",
-        action="store",
-    )
 
 
 @pytest.hookimpl
@@ -54,10 +48,6 @@ class PytestContainersPlugin:
     def __init__(self, config: pytest.Config, invoker) -> None:
         self.pytestconfig = config
         self.process_invoker = invoker
-
-    def is_xdist_worker(self) -> bool:
-        """Decipher if the executable pytest process is one of an xdist execnet gateway/worker."""
-        return os.environ.get(EnvironmentVars.PYTEST_XDIST_WORKER, Constants.MASTER) == Constants.MASTER
 
     @pytest.hookimpl
     def pytest_sessionstart(self) -> None:
