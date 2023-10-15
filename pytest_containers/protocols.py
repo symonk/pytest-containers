@@ -11,8 +11,8 @@ class Servicable(Protocol):
         """Stop the services."""
 
 
-class Runnable(Protocol):
+class Spawnable(Protocol):
     """Implicit interface for something that can run a subprocess."""
 
-    def run(self):
+    def spawn(self):
         """Run the subprocess."""

@@ -4,8 +4,8 @@ import typing
 import pytest
 
 from .constants import Constants
-from .invoker import SubProcessInvoker
 from .services import DockerComposeServices
+from .subproc import ProcessCaller
 
 
 @pytest.hookimpl
@@ -37,7 +37,7 @@ def pytest_configure(config: pytest.Config) -> None:
     """Conditionally register the plugin."""
     if not config.option.no_docker:
         config.pluginmanager.register(
-            plugin=PytestContainersPlugin(config=config, invoker=SubProcessInvoker([])),
+            plugin=PytestContainersPlugin(config=config, invoker=ProcessCaller()),
             name=Constants.LIBRARY_NAME,
         )
 
@@ -82,7 +82,7 @@ def docker_compose_files(
 
 
 @pytest.fixture(scope="session")
-def docker_services(docker_compose_files) -> typing.Generator[DockerComposeServices, None, None]:
+def docker_services(docker_compose_files, docker_command) -> typing.Generator[DockerComposeServices, None, None]:
     """Wraps a docker compose up and down invocation as a context, yielding the running service objects into the tests
     that need them, guaranteeing to teardown the services cluster after the test session has finished.
 
@@ -90,7 +90,11 @@ def docker_services(docker_compose_files) -> typing.Generator[DockerComposeServi
     than attempt to compose up in a subprocess.
 
     """
-    with DockerComposeServices(invoker=SubProcessInvoker(compose_files=docker_compose_files)) as services:
+    with DockerComposeServices(
+        subproc_caller=ProcessCaller(),
+        compose_files=docker_compose_files,
+        compose_command=docker_command,
+    ) as services:
         # automatically compose `down` the services after the pytest session has finished.
         yield services
 
