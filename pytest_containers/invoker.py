@@ -15,6 +15,7 @@ class SubProcessInvoker:
         """Checks that each of the paths provided are considered correct docker-compose files.
 
         This utilises `docker compose config` and relies on the exit code of that for each file.
+
         """
         command = ""
         return not command

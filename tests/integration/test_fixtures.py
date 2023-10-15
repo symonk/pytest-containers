@@ -36,7 +36,7 @@ def test_docker_compose_default_is_correct(pytester: pytest.Pytester) -> None:
     pytester.makepyfile(
         """
         def test_default_compose_files(docker_compose_files, tmpdir):
-            assert docker_compose_files[0].name == "docker-compose.yml"
+            assert str(docker_compose_files[0]).endswith("docker-compose.yml")
         """,
     )
     result = pytester.runpytest()

@@ -15,6 +15,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     """Register the plugins command line arguments.
 
     :params parser: The pytest custom argparser.
+
     """
     group = parser.getgroup("pytest-containers")
     group.addoption(
@@ -34,7 +35,6 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     group.addoption(
         "--compose-path",
         action="store",
-        
     )
 
 
@@ -72,6 +72,7 @@ def docker_command() -> str:
     """Returns the prefix compose command that is used when executing subprocesses.
 
     Override this fixture to use something custom, or to use the older style `docker-compose` command.
+
     """
     return "docker compose"
 
@@ -85,6 +86,7 @@ def docker_compose_files(
     will be passed to docker compose -f.
 
     :param pytestconfig: The `pytest.Config` object.
+
     """
     return (pathlib.Path(pytestconfig.rootdir) / Constants.COMPOSE_YML,)
 
@@ -96,6 +98,7 @@ def docker_services(docker_compose_files) -> typing.Generator[DockerComposeServi
 
     # Todo: This is not `xdist` aware and probably should be; each worker can return the running services rather
     than attempt to compose up in a subprocess.
+
     """
     with DockerComposeServices(invoker=SubProcessInvoker(compose_files=docker_compose_files)) as services:
         # automatically compose `down` the services after the pytest session has finished.
@@ -107,6 +110,7 @@ def docker_project_name() -> str:
     """The project name passed to `-p` for docker compose when starting the project.
 
     By default the name utilises the pid of the pytest process.
+
     """
     # Todo: Implement.
     return "pytest_1"

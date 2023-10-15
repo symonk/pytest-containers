@@ -1,8 +1,4 @@
-from dataclasses import dataclass
-from enum import StrEnum
-
-
-class Constants(StrEnum):
+class Constants:
     """String constants."""
 
     MASTER = "master"
@@ -10,7 +6,7 @@ class Constants(StrEnum):
     COMPOSE_YML = "docker-compose.yml"
 
 
-class EnvironmentVars(StrEnum):
+class EnvironmentVars:
     """Environment Variable Lookups."""
 
     PYTEST_XDIST_WORKER = "PYTEST_XDIST_WORKER"
