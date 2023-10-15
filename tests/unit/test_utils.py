@@ -10,5 +10,7 @@ def test_is_master(monkeypatch: pytest.MonkeyPatch):
         assert is_xdist_worker()
     
 
-def test_is_not_master():
-    assert not is_xdist_worker()
+def test_is_not_master(monkeypatch: pytest.MonkeyPatch):
+    with monkeypatch.context() as patcher:
+        patcher.setenv(EnvironmentVars.PYTEST_XDIST_WORKER, "gw0")
+        assert not is_xdist_worker()
