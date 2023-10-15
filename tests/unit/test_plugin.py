@@ -21,5 +21,5 @@ def test_disable_docker_does_not_register_plugin(pytester: pytest.Pytester):
             assert not pytestconfig.pluginmanager.has_plugin("pytest-containers")
         """,
     )
-    result = pytester.runpytest(["--disable-docker"])
+    result = pytester.runpytest(["--no-docker"])
     result.assert_outcomes(passed=1)

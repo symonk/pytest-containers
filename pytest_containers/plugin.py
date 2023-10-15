@@ -25,7 +25,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         help="Keep the compose services running after pytest has exited.",
     )
     group.addoption(
-        "--disable-docker",
+        "--no-docker",
         action="store_true",
         default=False,
         dest="disable_docker",
