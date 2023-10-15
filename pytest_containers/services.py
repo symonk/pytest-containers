@@ -14,15 +14,15 @@ class DockerComposeServices:
     def __init__(
         self,
         compose_files: typing.Sequence[pathlib.Path],
-        subproc_caller: Spawnable,
+        process_spawner: Spawnable,
         compose_command: str,
     ) -> None:
         self.compose_files = compose_files
         self.services: typing.Dict[typing.Any, typing.Any] = {}
-        self.subproc_caller = subproc_caller
+        self.subproc_caller = process_spawner
         self.compose_command = compose_command
 
-    def start(self) -> subprocess.CompletedProcess:
+    def start(self) -> subprocess.CompletedProcess[str]:
         """Attempt to start the docker services."""
         result = self.subproc_caller.spawn(
             args=(self.compose_command, "--file", str(self.compose_files[0]), "up"),
@@ -31,8 +31,9 @@ class DockerComposeServices:
         )
         return result
 
-    def stop(self) -> None:
+    def stop(self) -> subprocess.CompletedProcess[str]:
         """Stop the docker compose services."""
+        return self.subproc_caller.spawn(args=(self.compose_command, "down"))
 
     def __enter__(self) -> DockerComposeServices:
         self.start()

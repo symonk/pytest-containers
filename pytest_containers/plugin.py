@@ -4,8 +4,8 @@ import typing
 import pytest
 
 from .constants import Constants
+from .process_spawner import ProcessCaller
 from .services import DockerComposeServices
-from .subproc import ProcessCaller
 
 
 @pytest.hookimpl
@@ -91,7 +91,7 @@ def docker_services(docker_compose_files, docker_command) -> typing.Generator[Do
 
     """
     with DockerComposeServices(
-        subproc_caller=ProcessCaller(),
+        process_spawner=ProcessCaller(),
         compose_files=docker_compose_files,
         compose_command=docker_command,
     ) as services:
