@@ -24,8 +24,9 @@ class DockerComposeServices:
 
     def start(self) -> subprocess.CompletedProcess[str]:
         """Attempt to start the docker services."""
+        command = f"{self.compose_command} --file {str(self.compose_files[0])} up"
         result = self.subproc_caller.spawn(
-            args=(self.compose_command, "--file", str(self.compose_files[0]), "up"),
+            args=command,
             shell=True,  # Todo: Resolve not using this.
             capture_output=True,
         )
