@@ -6,6 +6,9 @@ authors = ["symonk <jackofspaces@gmail.com>"]
 license = "Apache License 2.0"
 readme = "README.rst"
 packages = [{include = "pytest_containers"}]
+classifiers = [
+    "Topic :: Framework :: Pytest"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"

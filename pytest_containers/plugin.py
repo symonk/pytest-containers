@@ -28,15 +28,20 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         "--no-docker",
         action="store_true",
         default=False,
-        dest="disable_docker",
+        dest="no_docker",
         help="Do not register the plugin, no services will be started.",
+    )
+    group.addoption(
+        "--compose-path",
+        action="store",
+        
     )
 
 
 @pytest.hookimpl
 def pytest_configure(config: pytest.Config) -> None:
     """Conditionally register the plugin."""
-    if not config.option.disable_docker:
+    if not config.option.no_docker:
         config.pluginmanager.register(
             plugin=PytestContainersPlugin(config=config, invoker=SubProcessInvoker([])),
             name=Constants.LIBRARY_NAME,
@@ -52,8 +57,7 @@ class PytestContainersPlugin:
 
     def is_xdist_worker(self) -> bool:
         """Decipher if the executable pytest process is one of an xdist execnet gateway/worker."""
-        master = "master"
-        return os.environ.get(EnvironmentVars.PYTEST_XDIST_WORKER, master) == master
+        return os.environ.get(EnvironmentVars.PYTEST_XDIST_WORKER, Constants.MASTER) == Constants.MASTER
 
     @pytest.hookimpl
     def pytest_sessionstart(self) -> None:

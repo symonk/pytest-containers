@@ -1,4 +1,6 @@
-def test_all_services_are_started() -> None:
+import pytest
+
+def test_all_services_are_started(pytest: pytest.Pytester) -> None:
     ...
 
 

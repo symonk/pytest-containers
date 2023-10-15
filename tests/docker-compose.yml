@@ -1,3 +1,4 @@
+# A test compose service for integration tests
 version: '2'
 services:
     httpbin:
