@@ -1,17 +1,13 @@
-files: '^script|tests|pytest_containers'
+files: ^(pytest_containers|scripts)
 repos:
-  - repo: meta
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.6
     hooks:
-      - id: identity
-        types: [python]
-  - repo: https://github.com/ambv/black
-    rev: 935f303a0a7b794e722c7df00c906be285884874
-    hooks:
-      - id: black
-        args: [--safe, --quiet, --line-length=120]
-        language_version: python3.9
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 27dcd3fd1dc01d3fdbeb188edb54dddf3d964236
+    rev: v4.5.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -21,41 +17,3 @@ repos:
       - id: debug-statements
       - id: detect-private-key
       - id: requirements-txt-fixer
-      - id: check-builtin-literals
-      - id: check-json
-      - id: check-merge-conflict
-      - id: forbid-submodules
-  - repo: https://github.com/pre-commit/mirrors-isort
-    rev: 32119baf69e913a72f2e1b1fbe0d56921b670ebb
-    hooks:
-      - id: isort
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.6.0
-    hooks:
-      - id: mypy
-        args: [--non-interactive, --install-types]
-  - repo: https://github.com/PyCQA/flake8
-    rev: b15cabc0f56b83a88872bb73aefa415bc58f384d
-    hooks:
-      - id: flake8
-        args: [--max-line-length=120]
-  - repo: https://github.com/symonk/pre-commit-pdb-vars
-    rev: 0.5.0
-    hooks:
-      - id: pdb-vars
-        args: [--ignore, commands]
-  - repo: https://github.com/hadialqattan/pycln
-    rev: v2.3.0
-    hooks:
-      - id: pycln
-        args: [--config=pyproject.toml, --all]
-  - repo: https://github.com/PyCQA/docformatter
-    rev: 4c042362b5e757e0fff5c2bd66d6790f0cac4c17
-    hooks:
-      - id: docformatter
-        args: [-i, --wrap-summaries, "120", --wrap-descriptions, "120"]
-  - repo: https://github.com/asottile/add-trailing-comma
-    rev: d4264add8c53425acf32c905aec2d1f4a05a7c5f
-    hooks:
-      - id: add-trailing-comma
-        args: [--py36-plus]
